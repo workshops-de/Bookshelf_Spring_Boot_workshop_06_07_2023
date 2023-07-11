@@ -1,0 +1,13 @@
+application:
+  title: @project.name@
+  version: @project.version@
+springdoc:
+  api-docs:
+    enabled: false
+
+bookshelf:
+  name: My Bookshelf
+  license:
+    name: MIT License
+    url: "https://opensource.org/licenses/MIT"
+  size: 1000
