@@ -11,3 +11,24 @@ bookshelf:
     name: MIT License
     url: "https://opensource.org/licenses/MIT"
   size: 1000
+
+spring:
+  datasource:
+    url: jdbc:postgresql://roasted-tomato.db.elephantsql.com/db_trainer
+    driver-class-name: org.postgresql.Driver
+    username: trainer
+    password: pwTrainer
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    generate-ddl: false
+    show-sql: true
+  #    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+  h2:
+    console:
+      enabled: true

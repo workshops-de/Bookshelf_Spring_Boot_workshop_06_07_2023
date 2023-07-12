@@ -1,0 +1,49 @@
+databaseChangeLog:
+  - changeSet:
+      id: createTableBooks
+      author: workshops
+      changes:
+        - createTable:
+            tableName: book
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  startWith: 5
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: title
+                  type: varchar
+              - column:
+                  name: isbn
+                  type: varchar
+              - column:
+                  name: description
+                  type: varchar
+        - createTable:
+            tableName: author
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  startWith: 5
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar
+              - column:
+                  name: book_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_author_book
+                    references: book(id)
+      rollback:
+        - dropTable:
+            tableName: book
+        - dropTable:
+            tableName: author

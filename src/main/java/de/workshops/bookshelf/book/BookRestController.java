@@ -1,5 +1,6 @@
 package de.workshops.bookshelf.book;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,8 +48,8 @@ public class BookRestController {
     }
 
     @PostMapping
-    public Book createBook(@RequestBody Book book) {
-        return book;
+    public Book createBook(@RequestBody @Valid CreateBookRequest createBookRequest) {
+        return service.addBook(createBookRequest);
     }
 
     @ExceptionHandler(Exception.class)

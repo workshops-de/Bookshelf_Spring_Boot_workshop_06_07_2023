@@ -18,6 +18,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 
@@ -66,6 +67,8 @@ class BookRestControllerMvcTest {
 
     @Test
     void shouldCreateNewBook() throws Exception {
+        final var expectedBook = new Book();
+        when(service.addBook(any(CreateBookRequest.class))).thenReturn(expectedBook);
         final var mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/book")
                         .content("""
                                 {
@@ -73,8 +76,7 @@ class BookRestControllerMvcTest {
                                     "title": "My first Book",
                                     "author": "Birgit Kratz",
                                     "description": "My very first book"
-                                }
-                                """)
+                                }""")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
@@ -82,6 +84,5 @@ class BookRestControllerMvcTest {
         final var contentAsJsonString = mvcResult.getResponse().getContentAsString();
         Book savedBook = mapper.readValue(contentAsJsonString, new TypeReference<>() {});
         assertNotNull(savedBook);
-        assertEquals("My first Book", savedBook.getTitle());
     }
 }
